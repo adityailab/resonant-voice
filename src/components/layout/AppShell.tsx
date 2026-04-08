@@ -17,7 +17,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               Powered by
             </span>
             <span className="px-3 py-1 bg-primary-container text-on-primary-container rounded-full text-[11px] font-bold">
-              Gemma 3 27B Vision
+              Gemma 3 Vision
             </span>
             <span className="px-3 py-1 bg-tertiary-fixed text-on-tertiary-fixed rounded-full text-[11px] font-bold">
               Multi-Language

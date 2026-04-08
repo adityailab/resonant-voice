@@ -1,36 +1,128 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Resonant Voice
+
+**Real-time sign language translator powered by Gemma 3 Vision AI.**
+
+An empathetic assistive communication platform that bridges the gap between sign language users and those who don't know sign language. Point your camera at someone signing, and Gemma 3 Vision AI translates their gestures into text and speech in real-time.
+
+## Features
+
+### Sign Language Translation
+- **Real-time camera translation** — Point camera at a signer, get instant English text
+- **Gemma 3 27B Vision** — Google's multimodal AI interprets sign language from video frames
+- **Multi-language support** — ASL, ISL, BSL, or auto-detect
+- **Conversation mode** — Rolling context builds coherent sentences across frames
+- **Multi-person detection** — Identifies when multiple people are signing
+
+### Two-Way Communication
+- **Sign-to-speech** — Translates signs and speaks them aloud via text-to-speech
+- **Reply input** — Hearing person types a reply, displayed as large text on screen for the deaf person to read
+- **Speech-to-text** — Mic button transcribes spoken words into the sentence builder
+
+### Hand Tracking
+- **MediaPipe skeleton overlay** — Real-time hand landmark visualization on the camera feed
+- **Hand count detection** — Shows how many hands are being tracked
+- **Offline fallback** — Basic gesture recognition via MediaPipe when internet is unavailable
+
+### Learning Mode (`/learn`)
+- **12 common signs** across 3 categories (Greetings, Responses, Needs)
+- **Practice with camera** — Perform a sign and get AI feedback on correctness
+- **Score tracking** — Track your learning progress per session
+
+### Communication Dashboard (`/speak`)
+- **Tile-based phrase builder** — Tap tiles to build sentences visually
+- **Predictive suggestions** — Common phrases suggested as chips
+- **Text-to-speech** — "Translate & Speak" reads your built sentence aloud
+- **Voice input** — Mic button for speech-to-text
+
+### Additional Features
+- **Conversation history** (`/history`) — Filter by date, replay, copy, with communication insights
+- **Phrase library** (`/library`) — Manage saved phrases, daily needs, social phrases, custom signs
+- **Emergency board** (`/emergency`) — One-tap HELP, YES/NO, medical needs, emergency contact dial
+- **Dark mode** — Toggle via the top bar
+- **Export conversations** — Download translation history as text file
+- **PWA support** — Installable on mobile devices
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Framework | Next.js 16 (App Router) + TypeScript |
+| AI | Gemma 3 27B Vision via Google AI Studio |
+| Hand Tracking | MediaPipe Tasks Vision |
+| Speech | Web Speech API (TTS + STT) |
+| Database | Prisma + SQLite |
+| State | Zustand + SWR |
+| Styling | Tailwind CSS + Material Design 3 color system |
+| Font | Lexend (designed to reduce visual stress) |
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+- Node.js 20+
+- A Google AI Studio API key ([get one free](https://aistudio.google.com/apikey))
+
+### Setup
 
 ```bash
+# Clone the repo
+git clone https://github.com/adityailab/resonant-voice.git
+cd resonant-voice
+
+# Install dependencies
+npm install
+
+# Set up your API key
+echo "GOOGLE_AI_API_KEY=your_key_here" > .env.local
+
+# Set up the database
+npx prisma generate
+npx prisma migrate dev --name init
+npm run seed
+
+# Start the dev server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+GOOGLE_AI_API_KEY=your_google_ai_studio_api_key
+```
 
-## Learn More
+## Architecture
 
-To learn more about Next.js, take a look at the following resources:
+```
+Camera Frame --> /api/translate --> Gemma 3 27B Vision --> JSON response --> UI
+                                                                           |
+MediaPipe --> Hand landmarks --> SVG skeleton overlay                  TTS/Speech
+                             --> Offline gesture fallback
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Pages
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Route | Description |
+|-------|-------------|
+| `/speak` | Communication dashboard with tile-based phrase builder |
+| `/gesture` | Real-time sign language translation with camera |
+| `/learn` | Interactive sign language learning with AI feedback |
+| `/history` | Conversation history with filters and insights |
+| `/library` | Phrase and gesture library management |
+| `/emergency` | Emergency quick-access communication board |
 
-## Deploy on Vercel
+## Design Philosophy
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Built on **"The Resonant Architecture"** — rejecting clinical, hospital-grade aesthetics in favor of intentional, empathetic, and dignified design:
+- No borders — boundaries through tonal background shifts
+- Lexend typeface — designed to reduce visual stress
+- Max 6 tiles per view — prevents cognitive overload
+- User output is always the hero — largest typography on screen
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## License
+
+MIT
+
+---
+
+Built for the Google AI Challenge. Powered by Gemma 3 Vision.
