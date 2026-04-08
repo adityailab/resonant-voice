@@ -1,26 +1,123 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --font-sans: "Lexend", sans-serif;
+  --font-headline: "Lexend", sans-serif;
+  --font-body: "Lexend", sans-serif;
+  --font-label: "Lexend", sans-serif;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Primary */
+  --color-primary: #00327d;
+  --color-primary-container: #0047ab;
+  --color-primary-fixed: #dae2ff;
+  --color-primary-fixed-dim: #b1c5ff;
+  --color-on-primary: #ffffff;
+  --color-on-primary-container: #a5bdff;
+  --color-on-primary-fixed: #001946;
+  --color-on-primary-fixed-variant: #00419e;
+
+  /* Secondary */
+  --color-secondary: #a83900;
+  --color-secondary-container: #fc6018;
+  --color-secondary-fixed: #ffdbcf;
+  --color-secondary-fixed-dim: #ffb59a;
+  --color-on-secondary: #ffffff;
+  --color-on-secondary-container: #531800;
+  --color-on-secondary-fixed: #380d00;
+  --color-on-secondary-fixed-variant: #802a00;
+
+  /* Tertiary */
+  --color-tertiary: #00400c;
+  --color-tertiary-container: #005a14;
+  --color-tertiary-fixed: #a3f69c;
+  --color-tertiary-fixed-dim: #88d982;
+  --color-on-tertiary: #ffffff;
+  --color-on-tertiary-container: #7fd07a;
+  --color-on-tertiary-fixed: #002204;
+  --color-on-tertiary-fixed-variant: #005312;
+
+  /* Error */
+  --color-error: #ba1a1a;
+  --color-error-container: #ffdad6;
+  --color-on-error: #ffffff;
+  --color-on-error-container: #93000a;
+
+  /* Surface */
+  --color-surface: #f8f9fa;
+  --color-surface-dim: #d9dadb;
+  --color-surface-bright: #f8f9fa;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f3f4f5;
+  --color-surface-container: #edeeef;
+  --color-surface-container-high: #e7e8e9;
+  --color-surface-container-highest: #e1e3e4;
+  --color-surface-variant: #e1e3e4;
+  --color-surface-tint: #2559bd;
+  --color-on-surface: #191c1d;
+  --color-on-surface-variant: #434653;
+
+  /* Other */
+  --color-background: #f8f9fa;
+  --color-on-background: #191c1d;
+  --color-outline: #737784;
+  --color-outline-variant: #c3c6d5;
+  --color-inverse-surface: #2e3132;
+  --color-inverse-on-surface: #f0f1f2;
+  --color-inverse-primary: #b1c5ff;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Lexend", sans-serif;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
+.hero-gradient {
+  background: linear-gradient(135deg, #00327d 0%, #0047ab 100%);
+}
+
+.signature-gradient {
+  background: linear-gradient(135deg, #00327d 0%, #0047ab 100%);
+}
+
+.ambient-shadow {
+  box-shadow: 0 12px 40px rgba(25, 28, 29, 0.06);
+}
+
+.glass-panel {
+  background: rgba(248, 249, 250, 0.8);
+  backdrop-filter: blur(20px);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+}
+
+.mesh-overlay {
+  background-image: radial-gradient(
+    circle at 50% 50%,
+    transparent 2px,
+    rgba(165, 189, 255, 0.1) 2px
+  );
+  background-size: 20px 20px;
+}
+
+.emergency-pulse {
+  box-shadow: 0 0 0 0 rgba(186, 26, 26, 0.4);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(186, 26, 26, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 20px rgba(186, 26, 26, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(186, 26, 26, 0);
+  }
 }
